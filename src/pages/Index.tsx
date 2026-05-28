@@ -151,6 +151,38 @@ function Hero() {
               Узнать больше
             </a>
           </div>
+
+          {/* Целевая программа */}
+          <div className="mt-12 animate-fade-in-up delay-500">
+            <div className="border border-[#c9963a]/30 bg-[#c9963a]/8 rounded-xl p-6 max-w-xl backdrop-blur-sm">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-5 h-0.5 bg-[#c9963a]" />
+                <span className="font-body text-[#c9963a] text-xs tracking-widest uppercase font-semibold">
+                  Целевая программа
+                </span>
+              </div>
+              <h2 className="font-display text-2xl md:text-3xl text-white font-medium mb-3 leading-tight">
+                Совместная кооперация
+              </h2>
+              <p className="font-body text-white/65 text-sm leading-relaxed mb-4">
+                Программа объединяет пайщиков для совместного достижения общих целей: приобретения имущества, организации снабжения и решения бытовых задач. Участники программы получают доступ к коллективным ресурсам кооператива на льготных условиях.
+              </p>
+              <div className="grid grid-cols-3 gap-3">
+                {[
+                  { icon: "Layers", text: "Совместное имущество" },
+                  { icon: "TrendingUp", text: "Льготные условия" },
+                  { icon: "Vote", text: "Равный голос" },
+                ].map((item) => (
+                  <div key={item.text} className="flex flex-col items-center gap-1.5 text-center">
+                    <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                      <Icon name={item.icon} size={14} fallback="Circle" className="text-[#c9963a]" />
+                    </div>
+                    <span className="font-body text-white/55 text-[11px] leading-tight">{item.text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
