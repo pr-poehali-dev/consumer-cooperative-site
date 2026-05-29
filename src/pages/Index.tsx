@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Icon from "@/components/ui/icon";
+import JoinModal from "@/components/JoinModal";
 
 const HERO_IMAGE =
   "https://cdn.poehali.dev/projects/bf0b7b46-9801-4dc3-9b37-a21509da6f76/files/c9beacd9-70e8-4787-ab7f-daf5dbd37338.jpg";
@@ -23,7 +24,7 @@ function useReveal() {
   }, []);
 }
 
-function Nav() {
+function Nav({ onJoin }: { onJoin: () => void }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -37,7 +38,6 @@ function Nav() {
     { label: "О кооперативе", href: "#about" },
     { label: "Услуги", href: "#services" },
     { label: "Документы", href: "#docs" },
-    { label: "Вступить", href: "#join" },
     { label: "Контакты", href: "#contacts" },
   ];
 
@@ -72,12 +72,12 @@ function Nav() {
           ))}
         </nav>
 
-        <a
-          href="#join"
+        <button
+          onClick={onJoin}
           className="hidden md:inline-flex items-center gap-2 bg-[#c9963a] hover:bg-amber-600 text-white font-body text-sm font-semibold px-5 py-2 rounded transition-colors"
         >
           Вступить
-        </a>
+        </button>
 
         <button
           className="md:hidden text-white p-1"
@@ -100,20 +100,19 @@ function Nav() {
               {l.label}
             </a>
           ))}
-          <a
-            href="#join"
-            onClick={() => setOpen(false)}
-            className="mt-4 block text-center bg-[#c9963a] text-white font-body font-semibold px-5 py-2.5 rounded"
+          <button
+            onClick={() => { setOpen(false); onJoin(); }}
+            className="mt-4 w-full text-center bg-[#c9963a] text-white font-body font-semibold px-5 py-2.5 rounded"
           >
             Вступить в кооператив
-          </a>
+          </button>
         </div>
       )}
     </header>
   );
 }
 
-function Hero() {
+function Hero({ onJoin }: { onJoin: () => void }) {
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
       <div className="absolute inset-0">
@@ -136,13 +135,13 @@ function Hero() {
             Объединяем людей для совместного решения жилищных, финансовых и бытовых задач. Работаем в рамках Федерального закона о потребительской кооперации.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up delay-400">
-            <a
-              href="#join"
+            <button
+              onClick={onJoin}
               className="inline-flex items-center justify-center gap-2 bg-[#c9963a] hover:bg-amber-600 text-white font-body font-semibold px-8 py-4 rounded transition-all hover:scale-105"
             >
               <Icon name="UserPlus" size={18} />
               Вступить в кооператив
-            </a>
+            </button>
             <a
               href="#about"
               className="inline-flex items-center justify-center gap-2 border border-white/30 hover:border-white/60 text-white font-body px-8 py-4 rounded transition-all hover:bg-white/10"
@@ -204,7 +203,7 @@ function Hero() {
   );
 }
 
-function About() {
+function About({ onJoin }: { onJoin: () => void }) {
   const values = [
     { icon: "Scale", title: "Законность", text: "Работаем строго в рамках ФЗ о потребительской кооперации. Полная юридическая прозрачность." },
     { icon: "Users", title: "Взаимопомощь", text: "Каждый пайщик — равноправный участник. Решения принимаются совместно на общем собрании." },
@@ -228,12 +227,12 @@ function About() {
             <p className="font-body text-[#5a7060] text-base leading-relaxed mb-8">
               Наша деятельность основана на принципах добровольности, равноправия и взаимной выгоды. Каждый пайщик имеет право голоса и доступ к услугам кооператива.
             </p>
-            <a
-              href="#join"
+            <button
+              onClick={onJoin}
               className="inline-flex items-center gap-2 text-[#2d5a35] font-body font-semibold text-sm border-b-2 border-[#c9963a] pb-0.5 hover:text-[#c9963a] transition-colors"
             >
               Стать пайщиком <Icon name="ArrowRight" size={16} />
-            </a>
+            </button>
           </div>
 
           <div className="grid grid-cols-2 gap-4 reveal">
@@ -443,17 +442,17 @@ function Documents() {
   );
 }
 
-function Join() {
+function Join({ onJoin }: { onJoin: () => void }) {
   const steps = [
-    { n: "01", title: "Подайте заявку", text: "Заполните форму на сайте или обратитесь лично в офис кооператива." },
-    { n: "02", title: "Внесите вступительный взнос", text: "Размер взноса определяется уставом. Деньги идут на развитие кооператива." },
+    { n: "01", title: "Ознакомьтесь с офертой", text: "Прочитайте условия вступления — права, обязанности и размер взноса." },
+    { n: "02", title: "Внесите вступительный взнос", text: "Оплатите 1 500 ₽ онлайн банковской картой через защищённый сервис ЮKassa." },
     { n: "03", title: "Станьте пайщиком", text: "Получите членскую книжку и доступ ко всем услугам кооператива." },
   ];
 
   return (
     <section id="join" className="py-24 bg-[#2d5a35]">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-16 items-start">
+        <div className="grid md:grid-cols-2 gap-16 items-center">
           <div className="reveal">
             <div className="text-xs font-body tracking-widest uppercase text-[#c9963a] mb-3">Членство</div>
             <h2 className="font-display text-5xl md:text-6xl font-light text-white leading-tight mb-6">
@@ -476,54 +475,32 @@ function Join() {
           </div>
 
           <div className="reveal">
-            <div className="bg-[#f7f3ec] rounded-xl p-8 shadow-2xl">
-              <h3 className="font-display text-2xl text-[#1a2e1e] font-semibold mb-6">Заявка на вступление</h3>
-              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-                <div>
-                  <label className="block font-body text-xs text-[#5a7060] mb-1 tracking-wide">Имя и фамилия *</label>
-                  <input
-                    type="text"
-                    placeholder="Иван Иванов"
-                    className="w-full font-body text-sm bg-white border border-[#2d5a35]/20 rounded px-4 py-3 outline-none focus:border-[#c9963a] transition-colors text-[#1a2e1e] placeholder:text-gray-400"
-                  />
-                </div>
-                <div>
-                  <label className="block font-body text-xs text-[#5a7060] mb-1 tracking-wide">Телефон *</label>
-                  <input
-                    type="tel"
-                    placeholder="+7 (___) ___-__-__"
-                    className="w-full font-body text-sm bg-white border border-[#2d5a35]/20 rounded px-4 py-3 outline-none focus:border-[#c9963a] transition-colors text-[#1a2e1e] placeholder:text-gray-400"
-                  />
-                </div>
-                <div>
-                  <label className="block font-body text-xs text-[#5a7060] mb-1 tracking-wide">Email</label>
-                  <input
-                    type="email"
-                    placeholder="email@example.com"
-                    className="w-full font-body text-sm bg-white border border-[#2d5a35]/20 rounded px-4 py-3 outline-none focus:border-[#c9963a] transition-colors text-[#1a2e1e] placeholder:text-gray-400"
-                  />
-                </div>
-                <div>
-                  <label className="block font-body text-xs text-[#5a7060] mb-1 tracking-wide">Сообщение</label>
-                  <textarea
-                    placeholder="Расскажите, что вас интересует..."
-                    rows={3}
-                    className="w-full font-body text-sm bg-white border border-[#2d5a35]/20 rounded px-4 py-3 outline-none focus:border-[#c9963a] transition-colors text-[#1a2e1e] placeholder:text-gray-400 resize-none"
-                  />
-                </div>
-                <label className="flex items-start gap-3 cursor-pointer">
-                  <input type="checkbox" className="mt-0.5 accent-[#2d5a35]" />
-                  <span className="font-body text-xs text-[#5a7060] leading-relaxed">
-                    Согласен(а) с обработкой персональных данных в соответствии с политикой конфиденциальности
-                  </span>
-                </label>
-                <button
-                  type="submit"
-                  className="w-full bg-[#1a2e1e] hover:bg-[#c9963a] text-white font-body font-semibold py-3.5 rounded transition-colors"
-                >
-                  Отправить заявку
-                </button>
-              </form>
+            <div className="bg-[#f7f3ec] rounded-xl p-8 shadow-2xl text-center">
+              <div className="w-16 h-16 rounded-full bg-[#c9963a]/15 flex items-center justify-center mx-auto mb-5">
+                <Icon name="UserPlus" size={30} className="text-[#c9963a]" />
+              </div>
+              <h3 className="font-display text-2xl text-[#1a2e1e] font-semibold mb-3">
+                Готовы вступить?
+              </h3>
+              <p className="font-body text-[#5a7060] text-sm leading-relaxed mb-2">
+                Вступительный взнос
+              </p>
+              <div className="font-display text-5xl text-[#1a2e1e] font-semibold mb-1">
+                1 500 <span className="text-3xl">₽</span>
+              </div>
+              <p className="font-body text-[#5a7060] text-xs mb-7">
+                Оплата онлайн — банковской картой
+              </p>
+              <button
+                onClick={onJoin}
+                className="w-full bg-[#1a2e1e] hover:bg-[#c9963a] text-white font-body font-semibold py-4 rounded-lg transition-colors text-base flex items-center justify-center gap-2"
+              >
+                <Icon name="CreditCard" size={18} />
+                Вступить и оплатить
+              </button>
+              <p className="font-body text-[#5a7060] text-xs mt-4 leading-relaxed">
+                Нажимая кнопку, вы перейдёте к оферте и форме оплаты
+              </p>
             </div>
           </div>
         </div>
@@ -631,16 +608,18 @@ function Footer() {
 
 const Index = () => {
   useReveal();
+  const [joinOpen, setJoinOpen] = useState(false);
   return (
     <div className="min-h-screen">
-      <Nav />
-      <Hero />
-      <About />
+      <Nav onJoin={() => setJoinOpen(true)} />
+      <Hero onJoin={() => setJoinOpen(true)} />
+      <About onJoin={() => setJoinOpen(true)} />
       <Services />
       <Documents />
-      <Join />
+      <Join onJoin={() => setJoinOpen(true)} />
       <Contacts />
       <Footer />
+      <JoinModal isOpen={joinOpen} onClose={() => setJoinOpen(false)} />
     </div>
   );
 };
