@@ -328,42 +328,65 @@ function About() {
 
 function Services() {
   const services = [
-    { icon: "Home", title: "Жилищные программы", text: "Помощь пайщикам в улучшении жилищных условий через механизм паевых взносов.", tag: "Жильё" },
-    { icon: "Banknote", title: "Финансовые услуги", text: "Предоставление займов членам кооператива на выгодных условиях в соответствии с уставом.", tag: "Финансы" },
-    { icon: "ShoppingCart", title: "Совместные закупки", text: "Организация оптовых закупок товаров и услуг для пайщиков по сниженным ценам.", tag: "Снабжение" },
-    { icon: "BookOpen", title: "Правовая поддержка", text: "Консультации по вопросам прав потребителей, жилищного и гражданского законодательства.", tag: "Право" },
-    { icon: "Handshake", title: "Посредничество", text: "Помощь в заключении договоров и переговорах с контрагентами от имени кооператива.", tag: "Сделки" },
-    { icon: "GraduationCap", title: "Обучение и семинары", text: "Образовательные мероприятия для пайщиков по финансовой грамотности и праву.", tag: "Образование" },
+    {
+      icon: "HandCoins",
+      title: "Касса взаимопомощи",
+      tag: "Взаимопомощь",
+      text: "Пайщики формируют общий фонд и получают из него беспроцентную помощь в трудных ситуациях — болезнь, срочные расходы, временные трудности. Без банков, без процентов, по-человечески.",
+      points: ["Беспроцентные займы пайщикам", "Единый фонд взаимопомощи", "Решение — на общем собрании"],
+    },
+    {
+      icon: "Hammer",
+      title: "Обучение ремёслам",
+      tag: "Образование",
+      text: "Организуем курсы и мастерские по практическим ремёслам: столярное дело, швейное производство, строительство, кулинария и другие направления. Знания — от мастера к мастеру внутри кооператива.",
+      points: ["Практические мастер-классы", "Наставничество от пайщиков", "Сертификаты участника"],
+    },
+    {
+      icon: "TrendingUp",
+      title: "Инвестирование",
+      tag: "Инвестиции",
+      text: "Коллективное вложение средств пайщиков в реальные проекты: недвижимость, производство, малый бизнес. Каждый участник получает долю прибыли пропорционально своему паю.",
+      points: ["Коллективные вложения", "Доход пропорционально паю", "Совместный контроль проектов"],
+    },
   ];
 
   return (
     <section id="services" className="py-24 bg-[#1a2e1e]">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16 reveal">
-          <div className="text-xs font-body tracking-widest uppercase text-[#c9963a] mb-3">Что мы предлагаем</div>
+          <div className="text-xs font-body tracking-widest uppercase text-[#c9963a] mb-3">Направления деятельности</div>
           <h2 className="font-display text-5xl md:text-6xl font-light text-white leading-tight">
-            Услуги кооператива
+            Чем занимается<br /><em>кооператив</em>
           </h2>
           <div className="w-12 h-0.5 bg-[#c9963a] mx-auto mt-5" />
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid md:grid-cols-3 gap-6">
           {services.map((s, i) => (
             <div
               key={s.title}
-              className="reveal group bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#c9963a]/40 rounded-lg p-6 transition-all cursor-default"
-              style={{ transitionDelay: `${i * 0.05}s` }}
+              className="reveal group bg-white/5 hover:bg-white/8 border border-white/10 hover:border-[#c9963a]/50 rounded-xl p-7 transition-all cursor-default flex flex-col"
+              style={{ transitionDelay: `${i * 0.1}s` }}
             >
-              <div className="flex items-start justify-between mb-4">
-                <div className="w-11 h-11 rounded-full bg-[#c9963a]/15 flex items-center justify-center group-hover:bg-[#c9963a]/25 transition-colors">
-                  <Icon name={s.icon} size={20} fallback="Circle" className="text-[#c9963a]" />
+              <div className="flex items-start justify-between mb-6">
+                <div className="w-14 h-14 rounded-xl bg-[#c9963a]/15 flex items-center justify-center group-hover:bg-[#c9963a]/25 transition-colors">
+                  <Icon name={s.icon} size={26} fallback="Circle" className="text-[#c9963a]" />
                 </div>
                 <span className="text-[10px] font-body tracking-widest uppercase text-white/30 bg-white/5 px-2 py-1 rounded">
                   {s.tag}
                 </span>
               </div>
-              <h3 className="font-display text-xl text-white font-medium mb-2">{s.title}</h3>
-              <p className="font-body text-white/55 text-sm leading-relaxed">{s.text}</p>
+              <h3 className="font-display text-2xl text-white font-medium mb-3 leading-tight">{s.title}</h3>
+              <p className="font-body text-white/55 text-sm leading-relaxed mb-6 flex-1">{s.text}</p>
+              <ul className="space-y-2">
+                {s.points.map((p) => (
+                  <li key={p} className="flex items-center gap-2">
+                    <div className="w-1 h-1 rounded-full bg-[#c9963a] flex-shrink-0" />
+                    <span className="font-body text-white/45 text-xs">{p}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
